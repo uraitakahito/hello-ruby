@@ -7,6 +7,7 @@ ARG user_name=developer
 # You can only use environment variables explicitly set in the Dockerfile.
 # https://docs.docker.com/engine/reference/builder/#/workdir
 ARG home=/home/${user_name}
+ARG ruby_version=3.0.6
 
 # Base
 RUN apt-get update && \
@@ -55,7 +56,16 @@ RUN curl -sS https://starship.rs/install.sh > ${home}/bin/install-starship.sh &&
 
 RUN chown -R ${user_id}:${group_id} ${home}
 
+#
+# rbenv
+#
+RUN apt-get install -y rbenv
+
 USER ${user_name}
 WORKDIR /home/${user_name}
+
+RUN git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
+  rbenv install ${ruby_version} && \
+  rbenv global ${ruby_version}
 
 ENTRYPOINT ["tail", "-F", "/dev/null"]
