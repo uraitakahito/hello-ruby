@@ -8,18 +8,23 @@ ARG user_name=developer
 # https://docs.docker.com/engine/reference/builder/#/workdir
 ARG home=/home/${user_name}
 
+# Base
 RUN apt-get update && \
   apt-get upgrade -y && \
+  apt-get install -y sudo && \
   apt-get install -y procps && \
   apt-get install -y zsh && \
   apt-get install -y sed && \
   apt-get install -y curl && \
   apt-get install -y git && \
-  apt-get install -y sudo
+  apt-get install -y gnupg2
+# Editor
 RUN apt-get install -y vim emacs
+# Utility
 RUN apt-get install -y tmux && \
   apt-get install -y fzf && \
-  apt-get install -y exa
+  apt-get install -y exa && \
+  apt-get install -y trash-cli
 
 COPY bin/set-superuser-and-group.sh ${home}/bin/
 RUN ${home}/bin/set-superuser-and-group.sh ${group_id} ${user_id} ${user_name}
