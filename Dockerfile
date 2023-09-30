@@ -7,7 +7,7 @@ ARG user_name=developer
 # You can only use environment variables explicitly set in the Dockerfile.
 # https://docs.docker.com/engine/reference/builder/#/workdir
 ARG home=/home/${user_name}
-ARG ruby_version=3.0.6
+ARG ruby_version=3.1.4
 
 # Base
 RUN apt-get update && \
