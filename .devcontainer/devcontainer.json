@@ -4,24 +4,15 @@
 	"name": "hello ruby",
 	"build": {
 		// Sets the run context to one level up instead of the .devcontainer folder.
-		"context": "..",
+		"context": ".",
 		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
-		"dockerfile": "../Dockerfile"
+		"dockerfile": "./Dockerfile"
 	},
 	"mounts": [
 		{
 			"type": "volume", "source": "zsh-volume", "target": "/zsh-volume"
 		}
 	],
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-vscode-remote.remote-containers",
-				"eamodio.gitlens",
-				"ms-azuretools.vscode-docker"
-			]
-		}
-	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -33,7 +24,15 @@
 	// "postCreateCommand": "cat /etc/os-release",
 
 	// Configure tool-specific properties.
-	// "customizations": {},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode-remote.remote-containers",
+				"eamodio.gitlens",
+				"ms-azuretools.vscode-docker"
+			]
+		}
+	}
 
 	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "devcontainer"
