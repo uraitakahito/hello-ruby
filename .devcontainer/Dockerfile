@@ -43,6 +43,13 @@ COPY bin/docker-entrypoint.sh /usr/local/bin/
 #
 RUN apt-get install -y rbenv
 
+#
+# Ruby 3.1
+#
+RUN apt-get install -y --no-install-recommends \
+  # require psych.h(libyaml-dev) to install debug gem
+  libyaml-dev
+
 USER ${user_name}
 WORKDIR /home/${user_name}
 
