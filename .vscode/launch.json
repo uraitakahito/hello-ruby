@@ -8,7 +8,7 @@
         // and see: https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg
         {
             "type": "rdbg",
-            "name": "Debug current file with rdbg",
+            "name": "Debug: file with rdbg",
             "request": "launch",
             "script": "${file}",
             "args": [],
@@ -22,6 +22,15 @@
             // Execute Ruby programs with `bundle exec` if `command` configuration is not given. and Gemfile is available in the workspace.
             // Note that you can specify this useBundler by the extension configuration (default: true).
             // "useBundler": false
+        },
+        {
+            "type": "rdbg",
+            "name": "Debug: RSpec file with rdbg",
+            "request": "launch",
+            "script": "${file}",
+            "args": [],
+            "askParameters": true,
+            "command": "rspec"
         },
         {
             "type": "rdbg",
