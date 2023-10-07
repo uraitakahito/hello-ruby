@@ -1,4 +1,12 @@
-#!/bin/bash -e
+#!/bin/bash
+
+set -eo pipefail
+
+if [ $# != 3 ]; then
+    echo "Argument values are: " $*
+    exit 1
+fi
+
 SHELL_NAME=$0
 GROUP_ID=$1
 USER_ID=$2
