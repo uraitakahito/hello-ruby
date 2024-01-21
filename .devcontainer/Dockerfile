@@ -10,9 +10,10 @@ ARG user_name=developer
 ARG home=/home/${user_name}
 ARG ruby_version=3.1.4
 
-RUN apt-get update && \
-  apt-get upgrade -y && \
-  apt-get install -y --no-install-recommends \
+RUN apt-get update -qq && \
+  apt-get upgrade -y -qq && \
+  apt-get install -y -qq --no-install-recommends \
+    # Basic
     less \
     sudo \
     procps \
@@ -23,14 +24,17 @@ RUN apt-get update && \
     iputils-ping \
     net-tools \
     git \
-    gnupg2
-RUN apt-get install -y --no-install-recommends vim emacs
-RUN apt-get install -y --no-install-recommends \
-  tmux \
-  # fzf needs PAGER(less or something)
-  fzf \
-  exa \
-  trash-cli
+    gnupg2 \
+    # Editor
+    vim emacs \
+    # Utility
+    tmux \
+    # fzf needs PAGER(less or something)
+    fzf \
+    exa \
+    trash-cli && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 COPY bin/set-superuser-and-group.sh ${home}/bin/
 RUN ${home}/bin/set-superuser-and-group.sh ${group_id} ${user_id} ${user_name}
@@ -40,16 +44,19 @@ RUN chown -R ${user_id}:${group_id} ${home}
 COPY bin/docker-entrypoint.sh /usr/local/bin/
 
 #
-# rbenv
+# Ruby
 #
-RUN apt-get install -y rbenv
-
-#
-# Ruby 3.1
-#
-RUN apt-get install -y --no-install-recommends \
-  # require psych.h(libyaml-dev) to install debug gem
-  libyaml-dev
+RUN apt-get update -qq && \
+  apt-get upgrade -y -qq && \
+  # apt-get install -y -qq --no-install-recommends \
+  apt-get install -y -qq \
+    # rbenv
+    rbenv \
+    # Ruby 3.1
+    # require psych.h(libyaml-dev) to install debug gem
+    libyaml-dev && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 USER ${user_name}
 WORKDIR /home/${user_name}
