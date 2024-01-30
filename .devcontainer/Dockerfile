@@ -73,7 +73,7 @@ RUN apt-get update -qq && \
 USER ${user_name}
 WORKDIR /home/${user_name}
 
-RUN git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
+RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
   rbenv install ${ruby_version} && \
   rbenv global ${ruby_version}
 
