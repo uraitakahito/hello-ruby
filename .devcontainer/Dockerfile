@@ -1,5 +1,5 @@
-# Debian 12.1
-FROM debian:bookworm-20230919
+# Debian 12.4
+FROM debian:bookworm-20240110
 
 ARG user_id=501
 ARG group_id=20
