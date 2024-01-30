@@ -1,10 +1,13 @@
 # Debian 12.4
 FROM debian:bookworm-20240110
 
+# ARG user_id=501
+# ARG group_id=20
+# ARG user_name=developer
+# ARG password=password
 ARG user_id=501
 ARG group_id=20
 ARG user_name=developer
-ARG password=password
 # The WORKDIR instruction can resolve environment variables previously set using ENV.
 # You can only use environment variables explicitly set in the Dockerfile.
 # https://docs.docker.com/engine/reference/builder/#/workdir
@@ -13,19 +16,32 @@ ARG ruby_version=3.1.4
 
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
-  apt-get install -y -qq --no-install-recommends \
-    # Basic
-    less \
-    sudo \
-    procps \
-    zsh \
-    sed \
-    curl \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
     ca-certificates \
+    git
+
+#
+# Add user.
+#
+#   Someone uses devcontainer, but the others don't.
+#   That is why dockerfile calls `features` MANUALLY here without devcontainer.json.
+#
+RUN cd /usr/src && \
+  git clone --depth 1 https://github.com/devcontainers/features.git && \
+  USERNAME=${user_name} \
+  UID=${user_id} \
+  GID=${group_id} \
+  CONFIGUREZSHASDEFAULTSHELL=true \
+    /usr/src/features/src/common-utils/install.sh
+
+#
+# Install packages
+#
+RUN apt-get update -qq && \
+  apt-get upgrade -y -qq && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+    # Basic
     iputils-ping \
-    net-tools \
-    git \
-    gnupg2 \
     # Editor
     vim emacs \
     # Utility
@@ -36,12 +52,6 @@ RUN apt-get update -qq && \
     trash-cli && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
-
-# Add superuser
-RUN curl -sS https://raw.githubusercontent.com/uraitakahito/set-superuser-and-group/main/set-superuser-and-group.sh > /usr/local/bin/set-superuser-and-group.sh && \
-  chmod 755 /usr/local/bin/set-superuser-and-group.sh && \
-  set-superuser-and-group.sh ${group_id} ${user_id} ${user_name} ${password} && \
-  chown -R ${user_id}:${group_id} ${home}
 
 COPY bin/docker-entrypoint.sh /usr/local/bin/
 
