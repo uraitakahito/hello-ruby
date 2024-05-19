@@ -32,7 +32,7 @@
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
-      // Reduce dependency on devcontainer.json. So let's use bin/install-*-extension.sh
+      // Reduce dependency on devcontainer.json. So let's use 'zshrc-entrypoint-init.d/install-*-extension.sh'.
       "extensions": [
       ]
     }
