@@ -66,6 +66,8 @@ RUN apt-get update -qq && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
+COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
+
 USER ${user_name}
 WORKDIR /home/${user_name}
 

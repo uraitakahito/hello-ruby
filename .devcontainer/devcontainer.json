@@ -32,13 +32,9 @@
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
-    "extensions": [
-      "ms-vscode-remote.remote-containers",
-      "eamodio.gitlens",
-      "ms-azuretools.vscode-docker",
-      // https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg
-      "KoichiSasada.vscode-rdbg"
-    ]
+      // Reduce dependency on devcontainer.json. So let's use bin/install-*-extension.sh
+      "extensions": [
+      ]
     }
   }
 
