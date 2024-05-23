@@ -3,6 +3,8 @@
 # Install Visual Studio Code Ruby extensions
 #
 extensions=(
+  # https://marketplace.visualstudio.com/items?itemName=kaiwood.endwise
+  "kaiwood.endwise"
   # https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg
   "KoichiSasada.vscode-rdbg"
   # https://marketplace.visualstudio.com/items?itemName=Shopify.ruby-lsp
