@@ -69,7 +69,6 @@ RUN apt-get update -qq && \
 COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
 USER ${user_name}
-WORKDIR /home/${user_name}
 
 RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
   rbenv install ${ruby_version} && \
