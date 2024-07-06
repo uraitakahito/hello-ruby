@@ -1,9 +1,9 @@
 # Debian 12.5
 FROM debian:bookworm-20240612
 
-ARG user_id=501
-ARG group_id=20
 ARG user_name=developer
+ARG user_id
+ARG group_id
 # The WORKDIR instruction can resolve environment variables previously set using ENV.
 # You can only use environment variables explicitly set in the Dockerfile.
 # https://docs.docker.com/engine/reference/builder/#/workdir
