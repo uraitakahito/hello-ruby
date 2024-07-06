@@ -58,11 +58,25 @@ RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
   # apt-get install -y -qq --no-install-recommends \
   apt-get install -y -qq \
-    # rbenv
-    rbenv \
-    # Ruby 3.1
+    #
+    # https://github.com/rbenv/ruby-build/wiki
+    #
+    autoconf \
+    patch \
+    build-essential \
+    rustc \
+    libssl-dev \
     # require psych.h(libyaml-dev) to install debug gem
-    libyaml-dev && \
+    libyaml-dev \
+    libreadline6-dev \
+    zlib1g-dev \
+    libgmp-dev \
+    libncurses5-dev \
+    libffi-dev \
+    libgdbm6 \
+    libgdbm-dev \
+    libdb-dev \
+    uuid-dev && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
@@ -70,9 +84,10 @@ COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
 USER ${user_name}
 
-RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
-  rbenv install ${ruby_version} && \
-  rbenv global ${ruby_version}
+RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$($HOME/.rbenv/bin/rbenv root)"/plugins/ruby-build && \
+  $HOME/.rbenv/bin/rbenv install ${ruby_version} && \
+  $HOME/.rbenv/bin/rbenv global ${ruby_version}
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
