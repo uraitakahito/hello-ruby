@@ -4,10 +4,6 @@ FROM debian:bookworm-20240612
 ARG user_name=developer
 ARG user_id
 ARG group_id
-# The WORKDIR instruction can resolve environment variables previously set using ENV.
-# You can only use environment variables explicitly set in the Dockerfile.
-# https://docs.docker.com/engine/reference/builder/#/workdir
-ARG home=/home/${user_name}
 ARG ruby_version=3.1.4
 
 RUN apt-get update -qq && \
@@ -82,9 +78,10 @@ RUN cd /usr/src && \
 USER ${user_name}
 
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$($HOME/.rbenv/bin/rbenv root)"/plugins/ruby-build && \
-  $HOME/.rbenv/bin/rbenv install ${ruby_version} && \
-  $HOME/.rbenv/bin/rbenv global ${ruby_version}
+ENV PATH="/home/${user_name}/.rbenv/bin:${PATH}"
+RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
+  rbenv install ${ruby_version} && \
+  rbenv global ${ruby_version}
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
