@@ -40,8 +40,7 @@ COPY docker-entrypoint.sh /usr/local/bin/
 #
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
-  # apt-get install -y -qq --no-install-recommends \
-  apt-get install -y -qq \
+  apt-get install -y -qq --no-install-recommends \
     #
     # https://github.com/rbenv/ruby-build/wiki
     #
