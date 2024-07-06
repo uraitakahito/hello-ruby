@@ -1,41 +1,41 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        // FIRST, YOU NEED DO `bundle install'
-        // and see: https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg
-        {
-            "type": "rdbg",
-            "name": "Debug: file with rdbg",
-            "request": "launch",
-            "script": "${file}",
-            "args": [],
-            "askParameters": true
-            // command:
-            // Executable Ruby command. You can specify `bundle exec ruby` for example.
-            // default: ruby
-            // "command": "rake"
-            //
-            // useBundler:
-            // Execute Ruby programs with `bundle exec` if `command` configuration is not given. and Gemfile is available in the workspace.
-            // Note that you can specify this useBundler by the extension configuration (default: true).
-            // "useBundler": false
-        },
-        {
-            "type": "rdbg",
-            "name": "Debug: RSpec file with rdbg",
-            "request": "launch",
-            "script": "${file}",
-            "args": [],
-            "askParameters": true,
-            "command": "rspec"
-        },
-        {
-            "type": "rdbg",
-            "name": "Attach with rdbg",
-            "request": "attach"
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    // FIRST, YOU NEED DO `bundle install'
+    // and see: https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg
+    {
+      "type": "rdbg",
+      "name": "Debug: file with rdbg",
+      "request": "launch",
+      "script": "${file}",
+      "args": [],
+      "askParameters": true
+      // command:
+      // Executable Ruby command. You can specify `bundle exec ruby` for example.
+      // default: ruby
+      // "command": "rake"
+      //
+      // useBundler:
+      // Execute Ruby programs with `bundle exec` if `command` configuration is not given. and Gemfile is available in the workspace.
+      // Note that you can specify this useBundler by the extension configuration (default: true).
+      // "useBundler": false
+    },
+    {
+      "type": "rdbg",
+      "name": "Debug: RSpec file with rdbg",
+      "request": "launch",
+      "script": "${file}",
+      "args": [],
+      "askParameters": true,
+      "command": "rspec"
+    },
+    {
+      "type": "rdbg",
+      "name": "Attach with rdbg",
+      "request": "attach"
+    }
+  ]
 }
