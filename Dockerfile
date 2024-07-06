@@ -14,7 +14,9 @@ RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
     ca-certificates \
-    git
+    git && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 #
 # Add user.
