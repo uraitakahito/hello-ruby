@@ -84,6 +84,9 @@ RUN cd /home/${user_name} && \
   git clone --depth 1 ${dotfiles_repository} && \
   dotfiles/install.sh
 
+#
+# rbenv
+#
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 ENV PATH="/home/${user_name}/.rbenv/bin:${PATH}"
 RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
