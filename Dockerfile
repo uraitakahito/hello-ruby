@@ -5,6 +5,7 @@ ARG user_name=developer
 ARG user_id
 ARG group_id
 ARG ruby_version=3.1.4
+ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
@@ -76,6 +77,16 @@ RUN cd /usr/src && \
     /usr/src/features/src/common-utils/install.sh
 USER ${user_name}
 
+#
+# dotfiles
+#
+RUN cd /home/${user_name} && \
+  git clone --depth 1 ${dotfiles_repository} && \
+  dotfiles/install.sh
+
+#
+# rbenv
+#
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 ENV PATH="/home/${user_name}/.rbenv/bin:${PATH}"
 RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
@@ -83,5 +94,4 @@ RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/
   rbenv global ${ruby_version}
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-
 CMD ["tail", "-F", "/dev/null"]
