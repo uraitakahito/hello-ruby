@@ -7,6 +7,9 @@ ARG group_id
 ARG ruby_version=3.3.4
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 
+# Avoid warnings by switching to noninteractive for the build process
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
@@ -20,7 +23,7 @@ RUN apt-get update -qq && \
 #
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+  apt-get install -y -qq --no-install-recommends \
     # Basic
     iputils-ping \
     # Editor
