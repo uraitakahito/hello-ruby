@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "eamodio.gitlens",
+    "GitHub.copilot",
+    "kaiwood.endwise",
+    "KoichiSasada.vscode-rdbg",
+    "ms-azuretools.vscode-docker",
+    "oderwat.indent-rainbow",
+    "Shopify.ruby-lsp",
+  ]
+}

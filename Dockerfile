@@ -1,36 +1,51 @@
-# Debian 12.5
-FROM debian:bookworm-20240612
+# Debian 12.6
+FROM debian:bookworm-20240812
 
 ARG user_name=developer
 ARG user_id
 ARG group_id
-ARG ruby_version=3.1.4
+ARG ruby_version=3.3.4
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 
-RUN apt-get update -qq && \
-  apt-get upgrade -y -qq && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
-    ca-certificates \
-    git && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+# Avoid warnings by switching to noninteractive for the build process
+ENV DEBIAN_FRONTEND=noninteractive
 
 #
 # Install packages
 #
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+  apt-get install -y -qq --no-install-recommends \
     # Basic
+    ca-certificates \
+    git \
     iputils-ping \
     # Editor
-    vim emacs \
+    vim \
     # Utility
     tmux \
     # fzf needs PAGER(less or something)
     fzf \
-    exa \
     trash-cli && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+#
+# eza
+# https://github.com/eza-community/eza/blob/main/INSTALL.md
+#
+RUN apt-get update -qq && \
+  apt-get install -y -qq --no-install-recommends \
+    gpg \
+    wget && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  mkdir -p /etc/apt/keyrings && \
+  wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg && \
+  echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | tee /etc/apt/sources.list.d/gierens.list && \
+  chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list && \
+  apt update && \
+  apt install -y eza && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
@@ -63,7 +78,6 @@ RUN apt-get update -qq && \
     uuid-dev && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
-COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
 #
 # Add user and install basic tools.
@@ -93,5 +107,6 @@ RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/
   rbenv install ${ruby_version} && \
   rbenv global ${ruby_version}
 
+WORKDIR /app
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["tail", "-F", "/dev/null"]
