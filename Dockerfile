@@ -4,7 +4,7 @@ FROM debian:bookworm-20240812
 ARG user_name=developer
 ARG user_id
 ARG group_id
-ARG ruby_version=3.1.4
+ARG ruby_version=3.3.4
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 
 RUN apt-get update -qq && \
