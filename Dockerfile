@@ -107,5 +107,6 @@ RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/
   rbenv install ${ruby_version} && \
   rbenv global ${ruby_version}
 
+WORKDIR /app
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["tail", "-F", "/dev/null"]
