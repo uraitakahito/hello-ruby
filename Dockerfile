@@ -60,7 +60,6 @@ RUN apt-get update -qq && \
     uuid-dev && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
-COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
 #
 # Add user and install basic tools.
