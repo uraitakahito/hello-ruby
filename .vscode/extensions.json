@@ -1,11 +1,34 @@
 {
   "recommendations": [
-    "eamodio.gitlens",
-    "GitHub.copilot",
+    //
+    // Ruby
+    //
+    // https://marketplace.visualstudio.com/items?itemName=kaiwood.endwise
     "kaiwood.endwise",
+    // https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg
     "KoichiSasada.vscode-rdbg",
-    "ms-azuretools.vscode-docker",
-    "oderwat.indent-rainbow",
+    // https://marketplace.visualstudio.com/items?itemName=Shopify.ruby-lsp
     "Shopify.ruby-lsp",
+    //
+    // Others
+    //
+    // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+    "eamodio.gitlens",
+    // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
+    "GitHub.copilot",
+    // https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
+    "GitHub.vscode-github-actions",
+    // https://marketplace.visualstudio.com/items?itemName=jasonnutter.vscode-codeowners
+    "jasonnutter.vscode-codeowners",
+    // https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
+    "ms-azuretools.vscode-docker",
+    // https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
+    "oderwat.indent-rainbow",
+    // https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
+    "redhat.vscode-yaml",
+    // https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck
+    "timonwong.shellcheck",
+    // https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
+    "usernamehw.errorlens",
   ]
 }

@@ -1,10 +1,18 @@
-## How to connect VS Code's debugger to an app or process that's already running
+Build your docker image:
 
 ```console
-% cd hello-ruby
-% PROJECT=$(basename `pwd`)
-% docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+% PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+```
+
+And run it:
+
+```console
 % docker container run -it --rm --init --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
+```
+
+Run the following commands inside the Docker containers:
+
+```console
 $ rbenv exec bundle install
 ```
 
