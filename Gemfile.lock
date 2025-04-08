@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:uraitakahito/hello_gem.git
+  revision: c3a0a8cb3a18b0413e26290cc10db17ec5e032c4
+  specs:
+    hello_gem (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -61,10 +67,12 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin-24
   x86_64-linux
 
 DEPENDENCIES
   debug (~> 1.8)
+  hello_gem!
   rspec (~> 3.12)
   rubocop
   rubocop-performance
