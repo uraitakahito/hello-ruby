@@ -1,6 +1,46 @@
 {
   "recommendations": [
     //
+    // Git & GitHub
+    //
+    // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+    "eamodio.gitlens",
+    // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
+    "GitHub.copilot",
+    // https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
+    "GitHub.vscode-github-actions",
+
+    //
+    // JSON
+    //
+    // https://marketplace.visualstudio.com/items?itemName=remcohaszing.schemastore
+    "remcohaszing.schemastore",
+
+    //
+    // YAML
+    //
+    // https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
+    "redhat.vscode-yaml",
+
+    //
+    // Mermaid
+    //
+    // https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid
+    "bierner.markdown-mermaid",
+    // https://marketplace.visualstudio.com/items?itemName=bpruitt-goddard.mermaid-markdown-syntax-highlighting
+    "bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+
+    //
+    // Others
+    //
+    // https://marketplace.visualstudio.com/items?itemName=dbankier.vscode-quick-select
+    "dbankier.vscode-quick-select",
+    // https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck
+    "timonwong.shellcheck",
+    // https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
+    "usernamehw.errorlens",
+
+    //
     // Ruby
     //
     // https://marketplace.visualstudio.com/items?itemName=kaiwood.endwise
@@ -9,26 +49,5 @@
     "KoichiSasada.vscode-rdbg",
     // https://marketplace.visualstudio.com/items?itemName=Shopify.ruby-lsp
     "Shopify.ruby-lsp",
-    //
-    // Others
-    //
-    // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
-    "eamodio.gitlens",
-    // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
-    "GitHub.copilot",
-    // https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
-    "GitHub.vscode-github-actions",
-    // https://marketplace.visualstudio.com/items?itemName=jasonnutter.vscode-codeowners
-    "jasonnutter.vscode-codeowners",
-    // https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
-    "ms-azuretools.vscode-docker",
-    // https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
-    "oderwat.indent-rainbow",
-    // https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
-    "redhat.vscode-yaml",
-    // https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck
-    "timonwong.shellcheck",
-    // https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
-    "usernamehw.errorlens",
   ]
 }

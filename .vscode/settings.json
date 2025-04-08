@@ -1,4 +1,37 @@
+// Settings file locations
+// Depending on your platform, the user settings file is located here:
+//   Windows %APPDATA%\Code\User\settings.json
+//   macOS $HOME/Library/Application\ Support/Code/User/settings.json
+//   Linux $HOME/.config/Code/User/settings.json
 {
+  //
+  // Basic Editing
+  //
+  // https://code.visualstudio.com/docs/editor/codebasics#_how-do-i-turn-on-word-wrap
+  "editor.wordWrap": "on",
+
+  //
+  // Copilot Next Edit Suggestions (Preview)
+  // https://code.visualstudio.com/updates/v1_97#_copilot-next-edit-suggestions-preview
+  //
+  "github.copilot.nextEditSuggestions.enabled": true,
+
+  //
+  // JSON/JSONC
+  //
+  "[json]": {
+    "editor.detectIndentation": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false
+  },
+  "[jsonc]": {
+    "editor.detectIndentation": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false
+  },
+
   "[ruby]": {
     "editor.defaultFormatter": "Shopify.ruby-lsp"
   },
