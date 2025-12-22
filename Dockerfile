@@ -60,6 +60,16 @@ ARG ruby_version=3.4.8
 ENV DEBIAN_FRONTEND=noninteractive
 
 #
+# Git
+#
+RUN apt-get update -qq && \
+  apt-get install -y -qq --no-install-recommends \
+    ca-certificates \
+    git && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+#
 # Ruby
 #
 RUN apt-get update -qq && \
@@ -90,13 +100,6 @@ RUN apt-get update -qq && \
 #
 # Add user and install common utils.
 #
-RUN apt-get update -qq && \
-  apt-get upgrade -y -qq && \
-  apt-get install -y -qq --no-install-recommends \
-    ca-certificates \
-    git && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
 RUN cd /usr/src && \
   git clone --depth 1 ${features_repository} && \
   USERNAME=${user_name} \
