@@ -49,10 +49,12 @@ FROM debian:bookworm-20251208
 ARG user_name=developer
 ARG user_id
 ARG group_id
-ARG ruby_version=3.3.4
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG features_repository="https://github.com/uraitakahito/features.git"
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
+# Refer to the following URL for Ruby versions:
+#   https://www.ruby-lang.org/ja/downloads/releases/
+ARG ruby_version=3.3.4
 
 # Avoid warnings by switching to noninteractive for the build process
 ENV DEBIAN_FRONTEND=noninteractive
