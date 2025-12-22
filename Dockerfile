@@ -70,6 +70,22 @@ RUN apt-get update -qq && \
   rm -rf /var/lib/apt/lists/*
 
 #
+# clone features
+#
+RUN cd /usr/src && \
+  git clone --depth 1 ${features_repository}
+
+#
+# Add user and install common utils.
+#
+RUN USERNAME=${user_name} \
+    USERUID=${user_id} \
+    USERGID=${group_id} \
+    CONFIGUREZSHASDEFAULTSHELL=true \
+    UPGRADEPACKAGES=false \
+      /usr/src/features/src/common-utils/install.sh
+
+#
 # Ruby
 #
 RUN apt-get update -qq && \
@@ -96,18 +112,6 @@ RUN apt-get update -qq && \
     uuid-dev && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
-
-#
-# Add user and install common utils.
-#
-RUN cd /usr/src && \
-  git clone --depth 1 ${features_repository} && \
-  USERNAME=${user_name} \
-  USERUID=${user_id} \
-  USERGID=${group_id} \
-  CONFIGUREZSHASDEFAULTSHELL=true \
-  UPGRADEPACKAGES=false \
-    /usr/src/features/src/common-utils/install.sh
 
 #
 # Install extra utils.
