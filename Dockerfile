@@ -21,10 +21,16 @@
 # % PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 # ```
 #
-# Run the Docker container:
+# Create a volume to persist the command history executed inside the Docker container.
+# It is stored in the volume because the dotfiles configuration redirects the shell history there.
+#   https://github.com/uraitakahito/dotfiles/blob/b80664a2735b0442ead639a9d38cdbe040b81ab0/zsh/myzshrc#L298-L305
+#
+#   docker volume create $PROJECT-zsh-history
+#
+# Start the Docker container(/run/host-services/ssh-auth.sock is a virtual socket provided by Docker Desktop for Mac.):
 #
 # ```console
-# % docker container run -d --rm --init --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image
+# % docker container run -d --rm --init -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 # ```
 #
 # Use [fdshell](https://github.com/uraitakahito/dotfiles/blob/37c4142038c658c468ade085cbc8883ba0ce1cc3/zsh/myzshrc#L93-L101) to log in to Docker.
@@ -32,6 +38,10 @@
 # ```console
 # % fdshell /bin/zsh
 # ```
+#
+# Only for the first startup, change the owner of the command history folder:
+#
+#   sudo chown -R $(id -u):$(id -g) /zsh-volume
 #
 # Run the following commands inside the Docker containers:
 #
@@ -70,6 +80,32 @@ RUN apt-get update -qq && \
   rm -rf /var/lib/apt/lists/*
 
 #
+# clone features
+#
+RUN cd /usr/src && \
+  git clone --depth 1 ${features_repository}
+
+#
+# Add user and install common utils.
+#
+RUN USERNAME=${user_name} \
+    USERUID=${user_id} \
+    USERGID=${group_id} \
+    CONFIGUREZSHASDEFAULTSHELL=true \
+    UPGRADEPACKAGES=false \
+      /usr/src/features/src/common-utils/install.sh
+
+#
+# Install extra utils.
+#
+RUN cd /usr/src && \
+  git clone --depth 1 ${extra_utils_repository} && \
+  ADDEZA=true \
+  ADDGRPCURL=true \
+  UPGRADEPACKAGES=false \
+    /usr/src/extra-utils/utils/install.sh
+
+#
 # Ruby
 #
 RUN apt-get update -qq && \
@@ -97,27 +133,6 @@ RUN apt-get update -qq && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-#
-# Add user and install common utils.
-#
-RUN cd /usr/src && \
-  git clone --depth 1 ${features_repository} && \
-  USERNAME=${user_name} \
-  USERUID=${user_id} \
-  USERGID=${group_id} \
-  CONFIGUREZSHASDEFAULTSHELL=true \
-  UPGRADEPACKAGES=false \
-    /usr/src/features/src/common-utils/install.sh
-
-#
-# Install extra utils.
-#
-RUN cd /usr/src && \
-  git clone --depth 1 ${extra_utils_repository} && \
-  ADDEZA=true \
-  UPGRADEPACKAGES=false \
-    /usr/src/extra-utils/utils/install.sh
-
 COPY docker-entrypoint.sh /usr/local/bin/
 
 USER ${user_name}
@@ -128,6 +143,11 @@ USER ${user_name}
 RUN cd /home/${user_name} && \
   git clone --depth 1 ${dotfiles_repository} && \
   dotfiles/install.sh
+
+#
+# Claude Code
+#
+RUN curl -fsSL https://claude.ai/install.sh | bash
 
 #
 # rbenv
