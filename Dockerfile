@@ -86,6 +86,16 @@ RUN USERNAME=${user_name} \
       /usr/src/features/src/common-utils/install.sh
 
 #
+# Install extra utils.
+#
+RUN cd /usr/src && \
+  git clone --depth 1 ${extra_utils_repository} && \
+  ADDEZA=true \
+  ADDGRPCURL=true \
+  UPGRADEPACKAGES=false \
+    /usr/src/extra-utils/utils/install.sh
+
+#
 # Ruby
 #
 RUN apt-get update -qq && \
@@ -112,15 +122,6 @@ RUN apt-get update -qq && \
     uuid-dev && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
-
-#
-# Install extra utils.
-#
-RUN cd /usr/src && \
-  git clone --depth 1 ${extra_utils_repository} && \
-  ADDEZA=true \
-  UPGRADEPACKAGES=false \
-    /usr/src/extra-utils/utils/install.sh
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
