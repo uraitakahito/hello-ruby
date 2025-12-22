@@ -1,3 +1,20 @@
+# ## Features of this Dockerfile
+#
+# - Not based on devcontainer; use by attaching VSCode to the container
+# - Assumes host OS is Mac
+#
+# ## Preparation
+#
+# ### SSH Agent
+#
+# Uses ssh-agent. After a restart, if you have not yet initiated an SSH login from your Mac, run the following command on the Mac.
+#
+#   ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+#
+# For more details about ssh-agent, see:
+#
+#   https://github.com/uraitakahito/hello-docker/blob/c942ab43712dde4e69c66654eac52d559b41cc49/README.md
+#
 # Build the Docker image:
 #
 # ```console
