@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../lib/use_github_gem'
 
 RSpec.describe 'Use GitHub Gem' do
