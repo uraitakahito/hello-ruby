@@ -59,4 +59,9 @@
     "workspaceSymbol": true,
     "references": true
   },
+
+  //
+  // rdbg (Ruby Debugger)
+  //
+  "rdbg.rdbgPath": "${userHome}/.rbenv/shims/rdbg",
 }
