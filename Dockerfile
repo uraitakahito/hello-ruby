@@ -100,6 +100,7 @@ RUN cd /usr/src && \
   git clone --depth 1 ${extra_utils_repository} && \
   ADDEZA=true \
   ADDGRPCURL=true \
+  ADDHADOLINT=true \
   UPGRADEPACKAGES=false \
     /usr/src/extra-utils/utils/install.sh
 
@@ -145,6 +146,7 @@ RUN cd /home/${user_name} && \
 #
 # Claude Code
 #
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -fsSL https://claude.ai/install.sh | bash
 
 #
