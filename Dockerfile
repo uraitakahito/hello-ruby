@@ -15,11 +15,15 @@
 #
 #   https://github.com/uraitakahito/hello-docker/blob/c942ab43712dde4e69c66654eac52d559b41cc49/README.md
 #
+# ### Download the files required to build the Docker container
+#
+#   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-ruby/refs/heads/main/Dockerfile
+#   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-ruby/refs/heads/main/docker-entrypoint.sh
+#   chmod 755 docker-entrypoint.sh
+#
 # Build the Docker image:
 #
-# ```console
-# % PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g`
-# ```
+#   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 #
 # Create a volume to persist the command history executed inside the Docker container.
 # It is stored in the volume because the dotfiles configuration redirects the shell history there.
@@ -29,15 +33,11 @@
 #
 # Start the Docker container(/run/host-services/ssh-auth.sock is a virtual socket provided by Docker Desktop for Mac.):
 #
-# ```console
-# % docker container run -d --rm --init --mount type=bind,src=/run/host-services/ssh-auth.sock,dst=/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
-# ```
+#   docker container run -d --rm --init --mount type=bind,src=/run/host-services/ssh-auth.sock,dst=/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
 # Use [fdshell](https://github.com/uraitakahito/dotfiles/blob/37c4142038c658c468ade085cbc8883ba0ce1cc3/zsh/myzshrc#L93-L101) to log in to Docker.
 #
-# ```console
-# % fdshell /bin/zsh
-# ```
+#   fdshell /bin/zsh
 #
 # Only for the first startup, change the owner of the command history folder:
 #
@@ -45,9 +45,7 @@
 #
 # Run the following commands inside the Docker containers:
 #
-# ```console
-# $ rbenv exec bundle install
-# ```
+#   rbenv exec bundle install
 #
 # Select **[Dev Containers: Attach to Running Container](https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container)** through the **Command Palette (Shift + command + P)**
 #
