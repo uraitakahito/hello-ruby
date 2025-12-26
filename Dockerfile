@@ -15,6 +15,12 @@
 #
 #   https://github.com/uraitakahito/hello-docker/blob/c942ab43712dde4e69c66654eac52d559b41cc49/README.md
 #
+# ### Download the files required to build the Docker container
+#
+#   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-ruby/refs/heads/main/Dockerfile
+#   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-ruby/refs/heads/main/docker-entrypoint.sh
+#   chmod 755 docker-entrypoint.sh
+#
 # Build the Docker image:
 #
 # ```console
