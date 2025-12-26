@@ -35,6 +35,8 @@
     //
     // https://marketplace.visualstudio.com/items?itemName=dbankier.vscode-quick-select
     "dbankier.vscode-quick-select",
+    // https://marketplace.visualstudio.com/items?itemName=exiasr.hadolint
+    "exiasr.hadolint",
     // https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck
     "timonwong.shellcheck",
     // https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
