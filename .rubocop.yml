@@ -8,6 +8,9 @@ AllCops:
   Exclude:
     - 'spec/spec_helper.rb'
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 RSpec/DescribeClass:
   Exclude:
     - 'spec/use_github_gem_spec.rb'
