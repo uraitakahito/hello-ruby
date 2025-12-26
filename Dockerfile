@@ -23,7 +23,7 @@
 #
 # Build the Docker image:
 #
-#   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+#   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g` --build-arg ruby_version=`cat .ruby-version`
 #
 # Create a volume to persist the command history executed inside the Docker container.
 # It is stored in the volume because the dotfiles configuration redirects the shell history there.
