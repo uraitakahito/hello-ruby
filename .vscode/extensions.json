@@ -5,8 +5,8 @@
     //
     // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
     "eamodio.gitlens",
-    // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
-    "GitHub.copilot",
+    // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
+    "GitHub.copilot-chat",
     // https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
     "GitHub.vscode-github-actions",
 
