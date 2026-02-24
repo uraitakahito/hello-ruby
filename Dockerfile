@@ -1,29 +1,16 @@
-# ## Features of this Dockerfile
+# Features of this Dockerfile
 #
 # - Not based on devcontainer; use by attaching VSCode to the container
+# - Claude Code is pre-installed
+# - Includes dotfiles and extra utilities
 # - Assumes host OS is Mac
-#
-# ## Preparation
-#
-# ### SSH Agent
-#
-# Uses ssh-agent. After a restart, if you have not yet initiated an SSH login from your Mac, run the following command on the Mac.
-#
-#   ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-#
-# For more details about ssh-agent, see:
-#
-#   https://github.com/uraitakahito/hello-docker/blob/c942ab43712dde4e69c66654eac52d559b41cc49/README.md
-#
-# ### Download the files required to build the Docker container
-#
-#   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-ruby/refs/heads/main/Dockerfile
-#   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-ruby/refs/heads/main/docker-entrypoint.sh
-#   chmod 755 docker-entrypoint.sh
+# - Passes the GH_TOKEN environment variable into the container
 #
 # Build the Docker image:
 #
 #   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g` --build-arg ruby_version=`cat .ruby-version`
+#
+# (First time only) Create a volume for command history:
 #
 # Create a volume to persist the command history executed inside the Docker container.
 # It is stored in the volume because the dotfiles configuration redirects the shell history there.
@@ -35,11 +22,20 @@
 #
 #   docker container run -d --rm --init --mount type=bind,src=/run/host-services/ssh-auth.sock,dst=/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
-# Use [fdshell](https://github.com/uraitakahito/dotfiles/blob/37c4142038c658c468ade085cbc8883ba0ce1cc3/zsh/myzshrc#L93-L101) to log in to Docker.
+# Log into the container.
 #
-#   fdshell /bin/zsh
+#   OR
 #
-# Only for the first startup, change the owner of the command history folder:
+# Connect from Visual Studio Code:
+#
+# 1. Open **Command Palette (Shift + Command + p)**
+# 2. Select **Dev Containers: Attach to Running Container**
+# 3. Open the `/app` directory
+#
+# For details:
+#   https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container
+#
+# (First time only) change the owner of the command history folder:
 #
 #   sudo chown -R $(id -u):$(id -g) /zsh-volume
 #
@@ -47,9 +43,6 @@
 #
 #   rbenv exec bundle install
 #
-# Select **[Dev Containers: Attach to Running Container](https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container)** through the **Command Palette (Shift + command + P)**
-#
-# Finally, open the `/app`.
 
 # Debian 12.12
 FROM debian:bookworm-20251208
