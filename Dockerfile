@@ -89,6 +89,10 @@ RUN USERNAME=${user_name} \
     USERGID=${group_id} \
     CONFIGUREZSHASDEFAULTSHELL=true \
     UPGRADEPACKAGES=false \
+    # When using ssh-agent inside Docker, add the user to the root group
+    # to ensure permission to access the mounted socket.
+    #   https://github.com/uraitakahito/features/blob/59e8acea74ff0accd5c2c6f98ede1191a9e3b2aa/src/common-utils/main.sh#L467-L471
+    ADDUSERTOROOTGROUP=true \
       /usr/src/features/src/common-utils/install.sh
 
 #
