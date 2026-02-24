@@ -8,7 +8,7 @@
 #
 # Build the Docker image:
 #
-#   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g` --build-arg ruby_version=`cat .ruby-version`
+#   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g` --build-arg ruby_version=`cat .ruby-version` --build-arg TZ=Asia/Tokyo
 #
 # (First time only) Create a volume for command history:
 #
@@ -59,6 +59,11 @@ ARG ruby_version=3.4.8
 
 # Avoid warnings by switching to noninteractive for the build process
 ENV DEBIAN_FRONTEND=noninteractive
+
+ARG LANG=C.UTF-8
+ENV LANG="$LANG"
+ARG TZ=UTC
+ENV TZ="$TZ"
 
 #
 # Git
