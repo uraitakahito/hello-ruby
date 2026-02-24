@@ -103,6 +103,9 @@ RUN cd /usr/src && \
   ADDEZA=true \
   ADDGRPCURL=true \
   ADDHADOLINT=true \
+  ADDCLAUDECODE=true \
+  # Claude Code is installed under $HOME, so the username must be specified.
+  USERNAME=${user_name} \
   UPGRADEPACKAGES=false \
     /usr/src/extra-utils/utils/install.sh
 
