@@ -149,12 +149,6 @@ RUN cd /home/${user_name} && \
   dotfiles/install.sh
 
 #
-# Claude Code
-#
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl -fsSL https://claude.ai/install.sh | bash
-
-#
 # rbenv
 #
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
